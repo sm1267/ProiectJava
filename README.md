@@ -1,7 +1,7 @@
 # Inventory Manager (Aplicatie de gestinue a stocurilor unui magazin)
 
 ---
-## ✨ Actiuni
+## Actiuni
 * Adăugarea unei noi categorii (ex: Alimente, Electronice)
 * Adăugarea unui nou distribuitor/furnizor
 * Adăugarea unui nou produs în stoc
