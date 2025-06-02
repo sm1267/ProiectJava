@@ -2,29 +2,21 @@ package models;
 
 import java.time.LocalDate;
 
-public class PerishableProduct extends Product {
+public final class PerishableProduct extends Product {
+    private LocalDate bestBefore;
 
-    private LocalDate expirationDate;
-
-    public PerishableProduct(String name,
-                             double price,
-                             int initialQty,
-                             Category category,
-                             Supplier supplier,
-                             LocalDate expirationDate) {
-        super(name, price, initialQty, category, supplier);
-        this.expirationDate = expirationDate;
+    public PerishableProduct(Integer id, String name, double price, int stockQty,
+                             LocalDate bestBefore, Category cat, Supplier sup) {
+        super(id, name, price, stockQty, cat, sup);
+        this.bestBefore = bestBefore;
+    }
+    public PerishableProduct(String name, double price, int stockQty,
+                             LocalDate bestBefore, Category cat, Supplier sup) {
+        this(null, name, price, stockQty, bestBefore, cat, sup);
     }
 
-    public LocalDate getExpirationDate() { return expirationDate; }
-    public void setExpirationDate(LocalDate expirationDate) { this.expirationDate = expirationDate; }
+    public LocalDate getBestBefore() { return bestBefore; }
+    public void setBestBefore(LocalDate bestBefore) { this.bestBefore = bestBefore; }
 
-    public boolean isExpired() {
-        return LocalDate.now().isAfter(expirationDate);
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + " | exp=" + expirationDate;
-    }
+    @Override public String getDtype() { return "PERISHABLE"; }
 }

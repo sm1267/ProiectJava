@@ -3,27 +3,29 @@ package models;
 import java.time.LocalDateTime;
 
 public class StockChangeLog {
-    public enum ChangeType { SALE, RESTOCK }
+    private Integer       id;
+    private Product       product;
+    private int           deltaQty;
+    private String        reason;
+    private LocalDateTime timestamp;
 
-    private final int productId;
-    private final int qtyChange;
-    private final ChangeType type;
-    private final LocalDateTime timestamp;
-
-    public StockChangeLog(int productId, int qtyChange, ChangeType type) {
-        this.productId = productId;
-        this.qtyChange = qtyChange;
-        this.type = type;
-        this.timestamp = LocalDateTime.now();
+    public StockChangeLog(Integer id, Product product, int deltaQty,
+                          String reason, LocalDateTime timestamp) {
+        this.id=id; this.product=product; this.deltaQty=deltaQty;
+        this.reason=reason; this.timestamp=timestamp;
+    }
+    public StockChangeLog(Product product, int deltaQty, String reason) {
+        this(null, product, deltaQty, reason, null);
     }
 
-    public int getProductId() { return productId; }
-    public int getQtyChange() { return qtyChange; }
-    public ChangeType getType() { return type; }
+    public Integer getId() { return id; }
+    public void    setId(Integer id) { this.id = id; }
+    public Product getProduct() { return product; }
+    public int     getDeltaQty() { return deltaQty; }
+    public String  getReason() { return reason; }
     public LocalDateTime getTimestamp() { return timestamp; }
 
-    @Override
-    public String toString() {
-        return "[" + type + "] product=" + productId + " qty=" + (qtyChange > 0 ? "+" : "") + qtyChange + " @ " + timestamp;
+    @Override public String toString() {
+        return "Log{id=%d, product=%s, delta=%d}".formatted(id, product.getName(), deltaQty);
     }
 }
